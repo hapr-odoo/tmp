@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="report_acount_document_inerit_sale_description" inherit_id="account.report_invoice_document">
+
+        <t t-elif="line.display_type == 'line_section'" position="attributes">
+            <attribute name="t-if">false</attribute>
+        </t>
+
+        <t t-elif="line.display_type == 'line_note'" position="attributes">
+            <attribute name="t-if">false</attribute>
+        </t>
+
+        <xpath expr="//td[@name = 'account_invoice_line_name']" position="replace">
+            <td name="account_invoice_line_name"><span t-if="line.name" t-field="line.name" t-options="{'widget': 'text'}">Bacon Burger</span></td>
+        </xpath>
+
+        <xpath expr="//t[@name = 'account_invoice_line_accountable']" position="after">
+            <t t-elif="line.display_type == 'line_section'">
+                <td colspan="99">
+                    <span t-field="line.description"/>
+                </td>
+                <t t-set="current_section" t-value="line"/>
+                <t t-set="current_subtotal" t-value="0"/>
+            </t>
+            <t t-elif="line.display_type == 'line_note'">
+                <td colspan="99">
+                    <span t-field="line.description"/>
+                </td>
+            </t>
+        </xpath>
+
+    </template>
+</odoo>

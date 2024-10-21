@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="sale_order_form_inherit_sale_description" model="ir.ui.view">
+        <field name="name">sale.order.view.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//tree/field[@name='name']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//tree/field[@name='product_template_id']" position="after">
+                <field name="description" optional="show" widget="lines_html_description" />
+            </xpath>
+
+        </field>
+    </record>
+</odoo> 

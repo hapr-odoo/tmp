@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+
+    <t t-name="sale_description.html_description_widget">
+        <a href="#" t-out="props.record.data.description" t-on-click.prevent.stop="() => this.onClickAddButton()"/>
+        <!-- <a href="#" t-out="props.record.data[props.description]" t-on-click.prevent.stop="() => this.onClickAddButton()"/> -->
+        <!-- <t t-out="props.record.data[props.description]" t-on-click = "onCLickAddButton"/> -->
+        
+    </t>
+
+</templates>

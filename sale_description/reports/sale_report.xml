@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <template id="report_saleorder_document_inerit_sale_description" inherit_id="sale.report_saleorder_document">
+
+        <xpath expr="//td[@name='td_name']" position="replace">
+            <td name="td_name"><span t-field="line.description">Bacon Burger</span></td>
+        </xpath>
+
+        <xpath expr="//td[@name='td_section_line']" position="replace">
+            <td name="td_section_line" colspan="99"><span t-field="line.description">A section title</span></td>
+        </xpath>
+
+        <xpath expr="//td[@name='td_note_line']" position="replace">
+            <td name="td_note_line" colspan="99"><span t-field="line.description">A note, whose content usually applies to the section or product above.</span></td>
+        </xpath>
+
+    </template>
+
+    <template id="sale_order_portal_content_inerit_sale_description" inherit_id="sale.sale_order_portal_content">
+
+        <t t-if="line.display_type == 'line_section'" position="attributes">
+            <attribute name="t-if">false</attribute>
+        </t>
+
+        <t t-if="line.display_type == 'line_note'" position="attributes">
+            <attribute name="t-if">false</attribute>
+        </t>
+
+        <xpath expr="//td[@id = 'product_name']/span" position="replace">
+            <span t-field="line.description"/>
+        </xpath>
+
+        <xpath expr="//t[@t-if='not line.display_type']" position="after">
+            <t t-if="line.display_type == 'line_section'">
+                <td colspan="99">
+                    <span t-field="line.description"/>
+                </td>
+                <t t-set="current_section" t-value="line"/>
+                <t t-set="current_subtotal" t-value="0"/>
+            </t>
+            <t t-if="line.display_type == 'line_note'">
+                <td colspan="99">
+                    <span t-field="line.description"/>
+                </td>
+            </t>
+        </xpath>
+
+    </template>
+
+    <template id="report_rental_order_document_inerit_sale_description" inherit_id="sale_renting.report_rental_order_document">
+        <xpath expr="//tbody[hasclass('sale_tbody')]/tr/td[1]" position="replace">
+            <td><span t-field="line.description">Product A</span></td>
+        </xpath>
+    </template>
+
+</odoo>
